@@ -1,15 +1,17 @@
 //ERR04-J Do not complete abruptly from a finally block
-//Noncompliant version
-
+//compliant version
+//fix by removing return from finally block
 
 public class R07_ERR04_J {
 
     public static int getNumber() {
+        int result;
         try {
-            return 1;
+            result = 1;
         } finally {
-            return 2; // abruptly completes from finally
+            System.out.println("Cleanup completed.");
         }
+        return result;
     }
 
     public static void main(String[] args) {
