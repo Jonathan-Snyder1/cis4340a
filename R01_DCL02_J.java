@@ -1,9 +1,11 @@
 //DCL02-J — Do not modify the collection's elements during an enhanced for statement
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-// non compliant version 
+//compliant version
+//fix by using iterator remove
 
 public class R01_DCL02_J {
     public static void main(String[] args) {
@@ -12,9 +14,11 @@ public class R01_DCL02_J {
         names.add("Bob");
         names.add("Charlie");
 
-        for (String name : names) {
+        Iterator<String> it = names.iterator();
+        while (it.hasNext()) {
+            String name = it.next();
             if (name.equals("Bob")) {
-                names.remove(name); // modifying during enhanced for loop
+                it.remove();
             }
         }
 
