@@ -3,14 +3,12 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-
-//highest bit of the 4 byte sequence is 1 readInt() interprets wrongly as a a negative number
-//Noncompliant version
+//Compliant version fix by converting unsigned int to long
 
 public class R03_NUM03_J {
 
-    public static int readUnsignedInt(DataInputStream in) throws IOException {
-        return in.readInt(); // incorrect for unsigned values
+    public static long readUnsignedInt(DataInputStream in) throws IOException {
+        return in.readInt() & 0xFFFFFFFFL;
     }
 
     public static void main(String[] args) {
@@ -18,7 +16,7 @@ public class R03_NUM03_J {
             DataInputStream in = new DataInputStream(
                     new FileInputStream("data.bin"));
 
-            int value = readUnsignedInt(in);
+            long value = readUnsignedInt(in);
             System.out.println("Value: " + value);
 
         } catch (IOException e) {
