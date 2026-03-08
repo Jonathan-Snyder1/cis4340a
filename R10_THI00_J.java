@@ -1,5 +1,7 @@
 //THI00-J Do not invoke Thread.run()
-//non compliant version
+//compliant version
+//fix by replacing run() with start() method to tell the jvm to create a new thread and then call run() method within new thread
+
 
 public class R10_THI00_J {
 
@@ -12,6 +14,6 @@ public class R10_THI00_J {
 
     public static void main(String[] args) {
         MyThread t = new MyThread();
-        t.run(); // Noncompliant: runs like a normal method call
+        t.start(); // Compliant: starts a new thread
     }
 }
